@@ -2,7 +2,6 @@ import Foundation
 import Combine
 
 public struct Thunder: Restfulable, Parseable {
-    public private(set) var text = "Hello, World!"
 
     static func parserToData<T: Codable>(from model: T) -> Data? {
         let encoder = JSONEncoder()
