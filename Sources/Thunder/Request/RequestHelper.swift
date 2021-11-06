@@ -25,7 +25,7 @@ public enum RequestError: Error, Identifiable, Equatable {
     case emptyResponse
 }
 
-enum HTTPMethod: String {
+public enum HTTPMethod: String {
     case get        = "GET"
     case post       = "POST"
     case put        = "PUT"
