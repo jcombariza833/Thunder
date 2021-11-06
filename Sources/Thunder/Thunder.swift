@@ -1,0 +1,6 @@
+public struct Thunder {
+    public private(set) var text = "Hello, World!"
+
+    public init() {
+    }
+}
