@@ -8,16 +8,16 @@
 
 import Foundation
 
-enum Result<T, Error: Swift.Error> {
+public enum Result<T, Error: Swift.Error> {
     case success(T)
     case failure(Error)
 }
 
-typealias RestError = Int
+public typealias RestError = Int
 private let nonSpecialError = 0
 
-enum RequestError: Error, Identifiable, Equatable {
-    var id: String { localizedDescription }
+public enum RequestError: Error, Identifiable, Equatable {
+    public var id: String { localizedDescription }
     
     case unableToMakeRequest
     case requestFailed(RestError)
@@ -33,9 +33,9 @@ enum HTTPMethod: String {
     case delete     = "DELETE"
 }
 
-struct BasicRequest {
+public struct BasicRequest {
     
-    static var thunderDecoder: JSONDecoder {
+    public static var thunderDecoder: JSONDecoder {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .millisecondsSince1970
         

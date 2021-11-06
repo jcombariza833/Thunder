@@ -1,9 +1,9 @@
 import Foundation
 import Combine
 
-public struct Thunder: Restfulable, Parseable {
-
-    static func parserToData<T: Codable>(from model: T) -> Data? {
+public class Thunder: Restfulable, Parseable {
+    
+    public static func parserToData<T: Codable>(from model: T) -> Data? {
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         
@@ -11,14 +11,14 @@ public struct Thunder: Restfulable, Parseable {
     }
     
         
-    static func parser<T>(from data: Data, to: T.Type, dateFormat: JSONDecoder.DateDecodingStrategy = .iso8601) -> T? where T : Decodable, T : Encodable {
+    public static func parser<T>(from data: Data, to: T.Type, dateFormat: JSONDecoder.DateDecodingStrategy = .iso8601) -> T? where T : Decodable, T : Encodable {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = dateFormat
         
         return try? decoder.decode(T.self, from: data)
     }
     
-    static func send<T>(model: T.Type, _ request: URLRequest, completion: @escaping (Result<T, RequestError>) -> Void)
+    public static func send<T>(model: T.Type, _ request: URLRequest, completion: @escaping (Result<T, RequestError>) -> Void)
         where T : Codable {
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
             
@@ -41,7 +41,7 @@ public struct Thunder: Restfulable, Parseable {
         task.resume()
     }
     
-    static func send<T>(model: T.Type, _ request: URLRequest, decoder: JSONDecoder = BasicRequest.thunderDecoder) -> AnyPublisher<T, RequestError> where T : Codable {
+    public static func send<T>(model: T.Type, _ request: URLRequest, decoder: JSONDecoder = BasicRequest.thunderDecoder) -> AnyPublisher<T, RequestError> where T : Codable {
         
         let sessionPublisher = URLSession.shared.dataTaskPublisher(for: request)
             .tryMap { output in

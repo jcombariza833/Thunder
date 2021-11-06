@@ -8,7 +8,8 @@
 
 import Foundation
 
-protocol Parseable {
+public protocol Parseable {
     static func parser<T: Codable>(from data: Data, to: T.Type, dateFormat: JSONDecoder.DateDecodingStrategy) -> T?
     static func parserToData<T: Codable>(from model: T) -> Data?
 }
+

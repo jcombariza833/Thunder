@@ -9,7 +9,8 @@
 import Foundation
 import Combine
 
-protocol Restfulable {
+public protocol Restfulable {
     static func send<T: Codable>(model: T.Type, _ request: URLRequest, completion: @escaping (Result<T, RequestError>) -> Void)
     static func send<T: Codable>(model: T.Type, _ request: URLRequest, decoder: JSONDecoder) -> AnyPublisher<T, RequestError>
 }
+
